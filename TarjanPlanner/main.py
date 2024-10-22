@@ -1,5 +1,5 @@
 # Rename to __main__.py before submission...
-from display_menu import display_menu
+import menu as menu
 
 def main():
     print("-" * 40)
@@ -8,8 +8,9 @@ def main():
     # Loop until quit selected by user.
     quit = False
     while not quit:
-        display_menu()
+        menu.display_menu()
         user_input = input("Enter your choice: ")
+        print(f"typed {user_input}")
         print("-" * 40)
         
         try:
@@ -18,7 +19,8 @@ def main():
                 print("You selected Quit. Exiting the program.")
                 quit = True
             elif 1 <= user_input <= 9:
-                print(f"You selected Option {user_input}.")
+                # Call the function associated with the chosen number
+                menu.options[user_input]()
             else:
                 print("Invalid choice. Please select a number between 0 and 9.")
         except:
