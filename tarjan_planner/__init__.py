@@ -1,4 +1,3 @@
-# pylint: disable=invalid-name
 """
 Documentation
 """
@@ -12,8 +11,8 @@ def main():
     Runs main program loop
     """
 
-    relatives_manager = RelativesManager("TarjanPlanner/relatives.csv")
-    transport_manager = TransportManager("TarjanPlanner/transport_modes.csv")
+    relatives_manager = RelativesManager("tarjan_planner/relatives.csv")
+    transport_manager = TransportManager("tarjan_planner/transport_modes.csv")
     print("-" * 40)
     print("Welcome to TarjanPlanner!")
 

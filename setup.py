@@ -15,9 +15,9 @@ setup(
     ],
     entry_points={
         "console_scripts": [
-            # Allows the main function of module to be run by typing 'python TarjanPlanner'
-            # in the console
-            "TarjanPlanner=TarjanPlanner:main"
+            # Allows the main function of module to be run by typing
+            # 'python TarjanPlanner' in the console
+            "TarjanPlanner=tarjan_planner:main"
         ]
     },
 )
