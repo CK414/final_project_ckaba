@@ -1,7 +1,13 @@
 # Rename to __main__.py before submission...
 import menu
+import TarjanPlanner
+from relatives_manager import RelativesManager
+from transport_manager import TransportManager
 
 def main():
+
+    relatives_manager = RelativesManager("TarjanPlanner/relatives.csv")
+    transport_manager = TransportManager("TarjanPlanner/transport_modes.csv")
     print("-" * 40)
     print("Welcome to TarjanPlanner!")
     
@@ -10,7 +16,6 @@ def main():
     while not quit:
         menu.display_menu()
         user_input = input("Enter your choice: ")
-        print(f"typed {user_input}")
         print("-" * 40)
         
         try:

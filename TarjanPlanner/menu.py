@@ -1,8 +1,15 @@
+from relatives_manager import RelativesManager
+from transport_manager import TransportManager
+import time
+
+relatives_manager = RelativesManager("TarjanPlanner/relatives.csv")
+transport_manager = TransportManager("TarjanPlanner/transport_modes.csv")
+
 def display_menu():
     print("Please select an option from the menu:")
     print("-" * 40)
-    print("1. Option 1")
-    print("2. Option 2")
+    print("1. List Relatives")
+    print("2. List Modes of Transport")
     print("3. Option 3")
     print("4. Option 4")
     print("5. Option 5")
@@ -14,10 +21,17 @@ def display_menu():
     print("-" * 40)
 
 def option1():
-    print("You selected Option 1.")
+    print("You selected Option 1: List Relatives")
+    relatives_manager.list_relatives()
+    print("Returning to Menu...")
+    time.sleep(1.5)
+    
 
 def option2():
-    print("You selected Option 2.")
+    print("You selected Option 2: List Modes of Transport")
+    transport_manager.list_transport()
+    print("Returning to Menu...")
+    time.sleep(1.5)
 
 def option3():
     print("You selected Option 3.")
