@@ -6,8 +6,8 @@ import time
 from .relatives_manager import RelativesManager
 from .transport_manager import TransportManager
 
-relatives_manager = RelativesManager("TarjanPlanner/relatives.csv")
-transport_manager = TransportManager("TarjanPlanner/transport_modes.csv")
+relatives_manager = RelativesManager("tarjan_planner/relatives.csv")
+transport_manager = TransportManager("tarjan_planner/transport_modes.csv")
 
 
 def display_menu():

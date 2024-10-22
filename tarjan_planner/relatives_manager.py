@@ -19,7 +19,7 @@ class RelativesManager:
         Function to load relatives data from file
         """
         # Load relatives from CSV file
-        with open(self.relatives_file, mode="r", encoding='utf-8') as file:
+        with open(self.relatives_file, mode="r", encoding="utf-8") as file:
             reader = csv.DictReader(file)
             return list(reader)
 

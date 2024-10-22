@@ -1,6 +1,7 @@
 """
 Documentation
 """
+
 from .relatives_manager import RelativesManager
 from .transport_manager import TransportManager
 from . import menu
@@ -11,8 +12,8 @@ def main():
     Runs main program loop
     """
 
-    relatives_manager = RelativesManager("tarjan_planner/relatives.csv")
-    transport_manager = TransportManager("tarjan_planner/transport_modes.csv")
+    # relatives_manager = RelativesManager("tarjan_planner/relatives.csv")
+    # transport_manager = TransportManager("tarjan_planner/transport_modes.csv")
     print("-" * 40)
     print("Welcome to TarjanPlanner!")
 
