@@ -1,5 +1,5 @@
 # Rename to __main__.py before submission...
-import menu as menu
+import menu
 
 def main():
     print("-" * 40)
