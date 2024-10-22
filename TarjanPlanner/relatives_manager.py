@@ -1,26 +1,55 @@
+"""
+Module containing all functions related to relatives.
+"""
+
 import csv
 
+
 class RelativesManager:
+    """
+    Class containing all functions working with relatives data
+    """
+
     def __init__(self, relatives_file):
         self.relatives_file = relatives_file
         self.relatives = self.load_relatives()
 
     def load_relatives(self):
+        """
+        Function to load relatives data from file
+        """
         # Load relatives from CSV file
-        with open(self.relatives_file, mode='r') as file:
+        with open(self.relatives_file, mode="r", encoding='utf-8') as file:
             reader = csv.DictReader(file)
             return list(reader)
-        
+
     def get_relatives(self):
-        # Return relatives list
+        """
+        Return relatives list
+        """
         return self.relatives
-    
+
     def list_relatives(self):
-        line_width = 65 # Define length of table
+        """
+        Print relatives list
+        """
+        line_width = 65  # Define length of table
         print("--- Relatives List ---".center(line_width))
         print("-" * line_width)
-        print("{:<12} {:<15} {:<14} {:<10} {:<10}".format("Relative", "Street Name", "District (Gu)", "Latitude", "Longitude"))
+        print(
+            f"{'Relative':<12}"
+            f"{'Street Name':<15}"
+            f"{'District (Gu)':<14}"
+            f"{'Latitude':<10}"
+            f"{'Longitude':<10}"
+        )
         print("-" * line_width)
         for relative in self.relatives:
-            print("{:<12} {:<15} {:<14} {:<10} {:<10}".format(relative['Relative'], relative['Street Name'], relative['District (Gu)'], relative['Latitude'], relative['Longitude']))
+            print(
+                f"{relative['Relative']:<12}"
+                f"{relative['Street Name']:<15}"
+                f"{relative['District (Gu)']:<14}"
+                f"{relative['Latitude']:<10}"
+                f"{relative['Longitude']:<10}"
+            )
         print("-" * line_width)
