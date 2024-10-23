@@ -1,10 +1,10 @@
 """
-Documentation
+Init module also containing the main module.
 """
 
 from .relatives_manager import RelativesManager
 from .transport_manager import TransportManager
-from . import menu
+from . import interface
 
 
 def main():
@@ -20,7 +20,7 @@ def main():
     # Loop until quit selected by user.
     menu_quit = False
     while not menu_quit:
-        menu.display_menu()
+        interface.display_menu()
         user_input = input("Enter your choice: ")
         print("-" * 40)
         # Check user input conforms to desired inputs
@@ -30,7 +30,7 @@ def main():
                 menu_quit = True
             elif 1 <= user_input <= 9:
                 # Call the function associated with the chosen number
-                menu.options[user_input]()
+                interface.options[user_input]()
             else:
                 print("Invalid choice. Please select a number between 0 and 9.")
         except ValueError:

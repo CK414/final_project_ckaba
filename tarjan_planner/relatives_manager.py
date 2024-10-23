@@ -3,6 +3,7 @@ Module containing all functions related to relatives.
 """
 
 import csv
+import os
 
 
 class RelativesManager:
@@ -31,13 +32,13 @@ class RelativesManager:
 
     def list_relatives(self):
         """
-        Print relatives list
+        Print relatives table
         """
-        line_width = 65  # Define length of table
+        line_width = 62  # Define length of table
         print("--- Relatives List ---".center(line_width))
         print("-" * line_width)
         print(
-            f"{'Relative':<12}"
+            f"{'Relative':<13}"
             f"{'Street Name':<15}"
             f"{'District (Gu)':<14}"
             f"{'Latitude':<10}"
@@ -46,7 +47,7 @@ class RelativesManager:
         print("-" * line_width)
         for relative in self.relatives:
             print(
-                f"{relative['Relative']:<12}"
+                f"{relative['Relative']:<13}"
                 f"{relative['Street Name']:<15}"
                 f"{relative['District (Gu)']:<14}"
                 f"{relative['Latitude']:<10}"

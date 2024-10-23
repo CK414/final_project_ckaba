@@ -31,24 +31,24 @@ class TransportManager:
 
     def list_transport(self):
         """
-        Print transport modes list
+        Print transport modes table
         """
-        line_width = 73
+        line_width = 68
         print("-" * line_width)
         print("--- Transport List ---".center(line_width))
         print("-" * line_width)
         print(
             f"{'Mode of Transport':<20}"
-            f"{'Speed (kmh)':<15}"
-            f"{'Cost per km':<15}"
-            f"{'Transfer Time (min)':<15}"
+            f"{'Speed (kmh)':<14}"
+            f"{'Cost per km':<14}"
+            f"{'Transfer Time (min)':<14}"
         )
         print("-" * line_width)
         for transport in self.transport:
             print(
                 f"{transport['Mode of Transport']:<20} "
-                f"{transport['Speed_kmh']:<15} "
-                f"{transport['Cost_per_km']:<15} "
-                f"{transport['Transfer_Time_min']:<15}"
+                f"{transport['Speed_kmh']:<13} "
+                f"{transport['Cost_per_km']:<13} "
+                f"{transport['Transfer_Time_min']:<14}"
             )
         print("-" * line_width)
