@@ -1,5 +1,5 @@
 """
-Init module also containing the main module.
+tarjan_planner init module also containing the main module.
 """
 
 from .relatives_manager import RelativesManager

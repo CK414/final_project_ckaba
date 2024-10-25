@@ -1,5 +1,5 @@
 """
-Main entry point to program.
+Entry point to program.
 """
 
 from .__init__ import main

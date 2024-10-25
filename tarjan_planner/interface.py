@@ -18,7 +18,7 @@ def display_menu():
     print("-" * 40)
     print("1. List Relatives")
     print("2. List Modes of Transport")
-    print("3. Option 3")
+    print("3. Execute Route Planner") # Run route planner
     print("4. Option 4")
     print("5. Option 5")
     print("6. Option 6")
@@ -29,7 +29,7 @@ def display_menu():
     print("-" * 40)
 
 
-def option1():
+def print_relatives():
     """
     Lists relatives and location data.
     """
@@ -39,7 +39,7 @@ def option1():
     time.sleep(1.5)
 
 
-def option2():
+def print_transport():
     """
     Lists transport data.
     """
@@ -49,11 +49,11 @@ def option2():
     time.sleep(1.5)
 
 
-def option3():
+def route_planner():
     """
-    .
+    Runs the route planner to calculate the most efficient route through Seoul.
     """
-    print("You selected Option 3.")
+    print("You selected Option 3: Execute Route Planner")
 
 
 def option4():
@@ -99,9 +99,9 @@ def option9():
 
 
 options = {
-    1: option1,
-    2: option2,
-    3: option3,
+    1: print_relatives,
+    2: print_transport,
+    3: route_planner,
     4: option4,
     5: option5,
     6: option6,

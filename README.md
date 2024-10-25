@@ -16,31 +16,27 @@
 
 ```
 /final_project_ckaba
-    /tarjan_planner
-        __init__.py
-        relatives_manager.py
-        transport_manager.py
-        optimizer.py
+# Root directory
+    /tarjan_planner 
+    # Directory contains main python modules for project.
+        filehandler.py
         interface.py
         logger.py
-    /file_organizer
+        optimizer.py
+        relatives_manager.py
+        transport_manager.py
         __init__.py
-        filehandler.py
-        sorter.py
-        config.py
-        metaprogramming.py
-        regex.py
-    /data
+        __main__.py
+    /data 
+    # Directory stores all files written or read by program.
         relatives.csv
         transport_modes.csv
-    /tests
+    /tests 
+    # Directory contains test modules for program.
+        test.py
         __init__.py
-        test_tarjanplanner.py
-        test_fileorganizer.py
-    main.py
     setup.py
     README.md
     .gitattributes
     .gitignore
-    requirements.txt
 ```
