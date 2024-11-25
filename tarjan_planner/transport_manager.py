@@ -29,6 +29,15 @@ class TransportManager:
         """
         return self.transport
 
+    def get_transport_by_mode(self, mode):
+        """
+        Return the transport mode details based on the transport mode name.
+        """
+        for transport in self.transport:
+            if transport["Mode of Transport"] == mode:
+                return transport
+        raise ValueError(f"Transport mode '{mode}' not found")
+
     def list_transport(self):
         """
         Print transport modes table

@@ -3,7 +3,6 @@ Module containing all functions related to relatives.
 """
 
 import csv
-import os
 
 
 class RelativesManager:
