@@ -4,6 +4,7 @@ Module containing all functions related to route planning.
 
 import networkx as nx
 import matplotlib.pyplot as plt
+import matplotlib.patches as mpatches
 from geopy.distance import geodesic
 from networkx.algorithms import approximation as approx
 from .relatives_manager import RelativesManager
@@ -143,7 +144,13 @@ class TarjanPlanner:
             font_size=10,
             edge_color=edge_colors,
         )
-        plt.show()
+        
+        # Create custom legend handles
+        legend_handles = [mpatches.Patch(color=color, label=mode) for mode, color in transport_colors.items()]
+        
+        # Add the legend to the plot
+        plt.legend(handles=legend_handles, title="Transport Modes", loc="upper right")
+        plt.show(block=False)
 
     def format_route(self, route, transport_methods, durations):
         """
