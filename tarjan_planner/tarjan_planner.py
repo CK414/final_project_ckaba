@@ -13,6 +13,9 @@ from .logger import logger, log_execution_time
 
 
 class TarjanPlanner:
+    '''
+    Class Containing all functions related to calculating the best route for Tarjan.
+    '''
     def __init__(self, relatives_file, transport_file):
         self.relatives_manager = RelativesManager(relatives_file)
         self.transport_manager = TransportManager(transport_file)
@@ -55,7 +58,12 @@ class TarjanPlanner:
                             transport=transport["Mode of Transport"],
                         )
                         logger.debug(
-                            f"**Edge from {relative1['Relative']} to {relative2['Relative']} by {transport['Mode of Transport']}: time={travel_time:.2f}, cost={cost:.2f}**"
+                            "Edge from %s to %s by %s: time=%.2f, cost=%.2f",
+                            relative1['Relative'],
+                            relative2['Relative'],
+                            transport['Mode of Transport'],
+                            travel_time,
+                            cost
                         )
 
     @log_execution_time
@@ -112,12 +120,16 @@ class TarjanPlanner:
                 )
                 durations.append(distance / speed + transfer_time)
             logger.debug(
-                f"**Leg from {path[i]} to {path[i + 1]} by {edge_data['transport']}: {weight}={edge_data[weight]:.2f}**"
+                "Leg from %s to %s by %s: %s=%.2f",
+                path[i],
+                path[i + 1],
+                edge_data['transport'],
+                weight, edge_data[weight]
             )
 
         return path, transport_methods, durations
 
-    def plot_graph(self, criterion="time"):
+    def plot_graph(self,): #  criterion="time"
         """
         Plot the graph using matplotlib, coloring edges based on the mode of transport.
         """
@@ -144,12 +156,22 @@ class TarjanPlanner:
             font_size=10,
             edge_color=edge_colors,
         )
-        
+
         # Create custom legend handles
-        legend_handles = [mpatches.Patch(color=color, label=mode) for mode, color in transport_colors.items()]
-        
+        legend_handles = [
+            mpatches.Patch(color=color, label=mode)
+            for mode, color in transport_colors.items()
+        ]
+
         # Add the legend to the plot
         plt.legend(handles=legend_handles, title="Transport Modes", loc="upper right")
+
+        # Add axis labels and grid
+        plt.xlabel("Latitude")
+        plt.ylabel("Longitude")
+        plt.gca().set_axis_on()
+        plt.grid(True)
+
         plt.show(block=False)
 
     def format_route(self, route, transport_methods, durations):
@@ -159,7 +181,10 @@ class TarjanPlanner:
         formatted_route = ""
         total_duration = 0
         for i in range(len(route) - 1):
-            formatted_route += f"{route[i]} -> {route[i + 1]} by {transport_methods[i]} (Duration: {durations[i]:.2f} hours)\n"
+            formatted_route += (
+            f"{route[i]} -> {route[i + 1]} by {transport_methods[i]} "
+            f"(Duration: {durations[i]:.2f} hours)\n"
+            )
             total_duration += durations[i]
         formatted_route += f"Total Duration: {total_duration:.2f} hours"
         return formatted_route

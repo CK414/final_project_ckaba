@@ -3,7 +3,6 @@ Module containing all logging functions.
 """
 
 import logging
-import os
 import time
 
 
@@ -11,8 +10,8 @@ def setup_logger():
     """
     Sets up the logger for the application.
     """
-    logger = logging.getLogger("tarjan_planner_logger")
-    logger.setLevel(logging.DEBUG)
+    tarjan_logger = logging.getLogger("tarjan_planner_logger")
+    tarjan_logger.setLevel(logging.DEBUG)
 
     # Create handlers
     c_handler = logging.StreamHandler()
@@ -27,10 +26,10 @@ def setup_logger():
     f_handler.setFormatter(f_format)
 
     # Add handlers to the logger
-    logger.addHandler(c_handler)
-    logger.addHandler(f_handler)
+    tarjan_logger.addHandler(c_handler)
+    tarjan_logger.addHandler(f_handler)
 
-    return logger
+    return tarjan_logger
 
 
 # Initialize the logger
@@ -44,7 +43,7 @@ def clear_log_file():
     log_file_path = "tarjan_planner/tarjan_planner.log"
 
     # Clear the log file
-    with open(log_file_path, "w"):
+    with open(log_file_path, "w", encoding="utf-8"):
         pass
 
     logger.info("Log file cleared.")
@@ -61,7 +60,7 @@ def log_execution_time(func):
         result = func(*args, **kwargs)
         end_time = time.time()
         execution_time = end_time - start_time
-        logger.info(f"Executed {func.__name__} in {execution_time:.4f} seconds")
+        logger.info("Executed %s in %.4f seconds", func.__name__, execution_time)
         return result
 
     return wrapper

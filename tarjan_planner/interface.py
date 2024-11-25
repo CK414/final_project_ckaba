@@ -9,11 +9,12 @@ from .transport_manager import TransportManager
 from .tarjan_planner import TarjanPlanner
 from .logger import logger, clear_log_file
 
-relatives_file = "tarjan_planner/relatives.csv"
-transport_file = "tarjan_planner/transport_modes.csv"
+RELATIVES_FILE = "tarjan_planner/relatives.csv"
+TRANSPORT_FILE = "tarjan_planner/transport_modes.csv"
 
-relatives_manager = RelativesManager(relatives_file)
-transport_manager = TransportManager(transport_file)
+relatives_manager = RelativesManager(RELATIVES_FILE)
+transport_manager = TransportManager(TRANSPORT_FILE)
+
 
 # Menu #
 def display_menu():
@@ -34,7 +35,8 @@ def display_menu():
     print("0. Quit")
     print("-" * 40)
 
-#1
+
+# 1
 def print_relatives():
     """
     Lists relatives and location data.
@@ -43,6 +45,7 @@ def print_relatives():
     relatives_manager.list_relatives()
     logger.info("Returning to Menu...")
     tm.sleep(1)
+
 
 # 2
 def print_transport():
@@ -54,13 +57,14 @@ def print_transport():
     logger.info("Returning to Menu...")
     tm.sleep(1)
 
+
 # 3
 def route_planner():
     """
     Runs the route planner to calculate the most efficient route through Seoul.
     """
     logger.info("User selected Option 3: Execute Route Planner")
-    planner = TarjanPlanner(relatives_file, transport_file)
+    planner = TarjanPlanner(RELATIVES_FILE, TRANSPORT_FILE)
     planner.create_graph()
 
     # Prompt the user to choose the criterion
@@ -69,15 +73,16 @@ def route_planner():
         logger.warning("Invalid option entered. Defaulting to 'time'.")
         criterion = "time"
 
-    planner.plot_graph(criterion=criterion)
     best_route, transport_methods, durations = planner.find_best_route(
         start_node="Relative_1", criterion=criterion
     )
+    planner.plot_graph() # criterion=criterion
     formatted_route = planner.format_route(best_route, transport_methods, durations)
-    logger.info(f"Best route based on {criterion}:\n{formatted_route}")
+    logger.info("Best route based on %s:\n%s", criterion, formatted_route)
 
     logger.info("Returning to Menu...")
     tm.sleep(1)
+
 
 # 4
 def compare_transport_methods():
@@ -85,7 +90,7 @@ def compare_transport_methods():
     Compares different transport methods between two selected relatives based on both time and cost.
     """
     logger.info("User selected Option 4: Compare Transport Methods")
-    planner = TarjanPlanner(relatives_file, transport_file)
+    planner = TarjanPlanner(RELATIVES_FILE, TRANSPORT_FILE)
     planner.create_graph()
 
     # Prompt the user to enter two integers corresponding to the relatives
@@ -139,6 +144,7 @@ def compare_transport_methods():
     logger.info("Returning to Menu...")
     tm.sleep(1)
 
+
 # 5
 def clear_log():
     """
@@ -150,27 +156,24 @@ def clear_log():
     logger.info("Returning to Menu...")
     tm.sleep(1)
 
+# def option6():
 
-"""
-def option6():
-
-    print("You selected Option 6.")
+#     print("You selected Option 6.")
 
 
-def option7():
+# def option7():
 
-    print("You selected Option 7.")
-
-
-def option8():
-
-    print("You selected Option 8.") 
+#     print("You selected Option 7.")
 
 
-def option9():
+# def option8():
 
-    print("You selected Option 9.")
-"""
+#     print("You selected Option 8.")
+
+
+# def option9():
+
+#     print("You selected Option 9.")
 
 options = {
     1: print_relatives,
