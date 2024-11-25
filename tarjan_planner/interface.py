@@ -15,7 +15,7 @@ transport_file = "tarjan_planner/transport_modes.csv"
 relatives_manager = RelativesManager(relatives_file)
 transport_manager = TransportManager(transport_file)
 
-
+# Menu #
 def display_menu():
     """
     Displays menu to user and waits for input.
@@ -34,7 +34,7 @@ def display_menu():
     print("0. Quit")
     print("-" * 40)
 
-
+#1
 def print_relatives():
     """
     Lists relatives and location data.
@@ -44,7 +44,7 @@ def print_relatives():
     logger.info("Returning to Menu...")
     tm.sleep(1)
 
-
+# 2
 def print_transport():
     """
     Lists transport data.
@@ -54,7 +54,7 @@ def print_transport():
     logger.info("Returning to Menu...")
     tm.sleep(1)
 
-
+# 3
 def route_planner():
     """
     Runs the route planner to calculate the most efficient route through Seoul.
@@ -79,7 +79,7 @@ def route_planner():
     logger.info("Returning to Menu...")
     tm.sleep(1)
 
-
+# 4
 def compare_transport_methods():
     """
     Compares different transport methods between two selected relatives based on both time and cost.
@@ -139,7 +139,7 @@ def compare_transport_methods():
     logger.info("Returning to Menu...")
     tm.sleep(1)
 
-
+# 5
 def clear_log():
     """
     Clears all data in the logger file.
