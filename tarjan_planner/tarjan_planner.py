@@ -34,8 +34,6 @@ class TarjanPlanner:
             self.route_map.add_node(
                 relative["Relative"], # Change to Street Name
                 pos=(float(relative["Longitude"]), float(relative["Latitude"])),
-                node_color='green' if relative["Relative"] == 'Tarjan' else 'blue',
-                node_shape='s' if relative["Relative"] == 'Tarjan' else 'o'
             )
 
         # Add edges based on transport modes
