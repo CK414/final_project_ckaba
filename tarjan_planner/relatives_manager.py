@@ -39,7 +39,7 @@ class RelativesManager:
         print(
             f"{'Relative':<13}"
             f"{'Street Name':<15}"
-            f"{'District (Gu)':<14}"
+            f"{'District (Gu)':<16}"
             f"{'Latitude':<10}"
             f"{'Longitude':<10}"
         )
@@ -48,7 +48,7 @@ class RelativesManager:
             print(
                 f"{relative['Relative']:<13}"
                 f"{relative['Street Name']:<15}"
-                f"{relative['District (Gu)']:<14}"
+                f"{relative['District (Gu)']:<16}"
                 f"{relative['Latitude']:<10}"
                 f"{relative['Longitude']:<10}"
             )

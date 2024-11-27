@@ -1,0 +1,19 @@
+Transport Type,Start,End
+Bus,Yeouido,Hanam
+Bus,Yeouido,Bukhan
+Bus,Hanam,Bukhan
+Bus,Bukhan,Seongsu
+Bus,Seongsu,Jamsil
+Walking,Sinsa,Cheongdam
+Bicycle,Hanam,Sinsa
+Bicycle,Hanam,Apgujeong
+Bicycle,Sinsa,Gangnam
+Bicycle,Sinsa,Yangjae
+Bicycle,Sinsa,Apgujeong
+Bicycle,Gangnam,Yangjae
+Bicycle,Cheongdam,Samseong
+Bicycle,Cheongdam,Apgujeong
+Bicycle,Cheongdam,Seongsu
+Bicycle,Apgujeong,Seongsu
+Bicycle,Apgujeong,Samseong
+Bicycle,Samseong,Jamsil

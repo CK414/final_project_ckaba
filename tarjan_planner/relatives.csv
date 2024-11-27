@@ -1,11 +1,12 @@
-Relative,Street Name,District (Gu),Latitude,Longitude
-Relative_1,Gangnam-daero,Gangnam-gu,37.4979,127.0276
-Relative_2,Yangjae-daero,Seocho-gu,37.4833,127.0322
-Relative_3,Sinsa-daero,Gangnam-gu,37.5172,127.0286
-Relative_4,Apgujeong-ro,Gangnam-gu,37.5219,127.0411
-Relative_5,Hannam-daero,Yongsan-gu,37.5340,127.0026
-Relative_6,Seongsu-daero,Seongdong-gu,37.5443,127.0557
-Relative_7,Cheongdam-ro,Gangnam-gu,37.5172,127.0391
-Relative_8,Bukhan-ro,Jongno-gu,37.5800,126.9844
-Relative_9,Samseong-ro,Gangnam-gu,37.5110,127.0590
-Relative_10,Jamsil-ro,Songpa-gu,37.5133,127.1028
+Relative,Street Name,District (Gu),Longitude,Latitude
+Tarjan,Yeoui-daero,Yeongdeungpo-gu,126.9243,37.5216
+Relative_1,Gangnam-daero,Gangnam-gu,127.0276,37.4979
+Relative_2,Yangjae-daero,Seocho-gu,127.0322,37.4833
+Relative_3,Sinsa-daero,Gangnam-gu,127.0286,37.5172
+Relative_4,Apgujeong-ro,Gangnam-gu,127.0411,37.5219
+Relative_5,Hannam-daero,Yongsan-gu,127.0026,37.5340
+Relative_6,Seongsu-daero,Seongdong-gu,127.0557,37.5443
+Relative_7,Cheongdam-ro,Gangnam-gu,127.0391,37.5172
+Relative_8,Bukhan-ro,Jongno-gu,126.9844,37.5800
+Relative_9,Samseong-ro,Gangnam-gu,127.0590,37.5110
+Relative_10,Jamsil-ro,Songpa-gu,127.1028,37.5133

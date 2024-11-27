@@ -5,6 +5,7 @@ Module containing all functions related to route planning.
 import networkx as nx
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
+from matplotlib.lines import Line2D
 from geopy.distance import geodesic
 from networkx.algorithms import approximation as approx
 from .relatives_manager import RelativesManager
@@ -31,8 +32,10 @@ class TarjanPlanner:
         # Add nodes for each relative
         for relative in relatives:
             self.route_map.add_node(
-                relative["Relative"],
-                pos=(float(relative["Latitude"]), float(relative["Longitude"])),
+                relative["Relative"], # Change to Street Name
+                pos=(float(relative["Longitude"]), float(relative["Latitude"])),
+                node_color='green' if relative["Relative"] == 'Tarjan' else 'blue',
+                node_shape='s' if relative["Relative"] == 'Tarjan' else 'o'
             )
 
         # Add edges based on transport modes
@@ -143,34 +146,82 @@ class TarjanPlanner:
             "Bicycle": "red",
             "Walking": "orange",
         }
+        
+        # Create a figure and axes
+        fig, ax = plt.subplots(figsize=(12, 8))
 
         # Determine edge colors based on the transport mode
         edge_colors = [transport_colors[data["transport"]] for u, v, data in edges]
 
+        # Separate nodes based on their attributes
+        tarjan_nodes = [node for node, data in self.route_map.nodes(data=True) if node == 'Tarjan']
+        other_nodes = [node for node in self.route_map.nodes() if node != 'Tarjan']
+
+        # Draw Tarjan's node as a green square
         nx.draw(
             self.route_map,
             pos,
             with_labels=True,
+            nodelist=tarjan_nodes,
+            node_color='lightgreen',
+            node_shape='s',
             node_size=300,
-            node_color="lightblue",
             font_size=10,
-            edge_color=edge_colors,
+            ax=ax
         )
 
+        # Draw other nodes as blue circles
+        nx.draw(
+            self.route_map,
+            pos,
+            with_labels=True,
+            nodelist=other_nodes,
+            node_color='lightblue',
+            node_shape='o',
+            node_size=300,
+            font_size=10,
+            edge_color=edge_colors,
+            ax=ax
+        )
+    
+        # nx.draw(
+        #     self.route_map,
+        #     pos,
+        #     with_labels=True,
+        #     node_size=300,
+        #     node_color="lightblue",
+        #     font_size=10,
+        #     edge_color=edge_colors,
+        #     ax=ax
+        # )
+
         # Create custom legend handles
-        legend_handles = [
+        transport_handles = [
             mpatches.Patch(color=color, label=mode)
             for mode, color in transport_colors.items()
         ]
+        
+        # Create custom legend handles for Tarjan's home and residential districts
+        location_handles = [
+            mpatches.Patch(color='lightgreen', label="Tarjan's Home", edgecolor='black'),
+            mpatches.Patch(color='lightblue', label="Residential Districts", edgecolor='black')
+        ]
+
+        # Create a faint grey line separator
+        separator = Line2D([0], [0], color='grey', lw=0.5, linestyle='--')
+
 
         # Add the legend to the plot
-        plt.legend(handles=legend_handles, title="Transport Modes", loc="upper right")
+        legend_handles = transport_handles + [separator] + location_handles
+        ax.legend(handles=legend_handles, title="Transport Modes & Locations", loc="upper right")
 
         # Add axis labels and grid
-        plt.xlabel("Latitude")
-        plt.ylabel("Longitude")
-        plt.gca().set_axis_on()
-        plt.grid(True)
+        ax.set_xlabel("Longitude")
+        ax.set_ylabel("Latitude")
+        ax.set_axis_on()
+        ax.grid(True)
+        
+        plt.subplots_adjust(left=0.05, right=0.95, top=0.95, bottom=0.05)
 
         plt.show(block=False)
 
