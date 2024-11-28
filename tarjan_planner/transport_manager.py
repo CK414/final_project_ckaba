@@ -61,3 +61,50 @@ class TransportManager:
                 f"{transport['Transfer_Time_min']:<14}"
             )
         print("-" * line_width)
+        
+class TransportLinkManager(TransportManager):
+    """
+    Class containing all functions working with transport links data
+    """
+
+    def __init__(self, transport_file, links_file):
+        super().__init__(transport_file)
+        self.links_file = links_file
+        self.links = self.load_links()
+
+    def load_links(self):
+        """
+        Function to load transport links from file
+        """
+        # Load transport links from CSV file
+        with open(self.links_file, mode="r", encoding="utf-8") as file:
+            reader = csv.DictReader(file)
+            return list(reader)
+
+    def get_links(self):
+        """
+        Return transport links list
+        """
+        return self.links
+
+    def list_links(self):
+        """
+        Print transport routes table
+        """
+        line_width = 50
+        print("-" * line_width)
+        print("--- Transport Routes ---".center(line_width))
+        print("-" * line_width)
+        print(
+            f"{'Transport Type':<16}"
+            f"{'Start':<17}"
+            f"{'End':<17}"
+        )
+        print("-" * line_width)
+        for link in self.links:
+            print(
+                f"{link['Transport Type']:<15} "
+                f"{link['Start']:<16} "
+                f"{link['End']:<16}"
+            )
+        print("-" * line_width)

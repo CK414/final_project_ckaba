@@ -5,15 +5,17 @@ Module containing all functions related to menu.
 import time as tm
 from geopy.distance import geodesic
 from .relatives_manager import RelativesManager
-from .transport_manager import TransportManager
+from .transport_manager import TransportManager, TransportLinkManager
 from .tarjan_planner import TarjanPlanner
 from .logger import logger, clear_log_file
 
 RELATIVES_FILE = "tarjan_planner/relatives.csv"
 TRANSPORT_FILE = "tarjan_planner/transport_modes.csv"
+LINKS_FILE = "tarjan_planner/transport_links.csv"
 
 relatives_manager = RelativesManager(RELATIVES_FILE)
-transport_manager = TransportManager(TRANSPORT_FILE)
+#transport_manager = TransportManager(TRANSPORT_FILE)
+transport_manager = TransportLinkManager(TRANSPORT_FILE, LINKS_FILE)
 
 
 # Menu #
@@ -25,11 +27,11 @@ def display_menu():
     print("-" * 40)
     print("1. List Relatives")
     print("2. List Modes of Transport")
-    print("3. Execute Route Planner")  # Run route planner
-    print("4. Compare transport modes between two relatives")
-    print("5. Clear Log File")
-    # print("6. Option 6")
-    # print("7. Option 7")
+    print("3. List Transport Links")
+    print("4. Execute Route Planner")  # Run route planner
+    print("5. Compare transport modes between two relatives")
+    print("6. Clear Log File")
+    print("7. Make Map")
     # print("8. Option 8")
     # print("9. Option 9")
     print("0. Quit")
@@ -57,40 +59,46 @@ def print_transport():
     logger.info("Returning to Menu...")
     tm.sleep(1)
 
-
 # 3
+def print_links():
+    """
+    Lists possible transport links
+    """
+    logger.info("User selected Option 3: List Transport Links")
+    transport_manager.list_links()
+    logger.info("Returning to Menu...")
+    tm.sleep(1)
+
+# 4
 def route_planner():
     """
     Runs the route planner to calculate the most efficient route through Seoul.
     """
-    logger.info("User selected Option 3: Execute Route Planner")
-    planner = TarjanPlanner(RELATIVES_FILE, TRANSPORT_FILE)
+    logger.info("User selected Option 4: Execute Route Planner")
+    planner = TarjanPlanner(RELATIVES_FILE, TRANSPORT_FILE, LINKS_FILE)
     planner.create_graph()
 
-    # Prompt the user to choose the criterion
-    criterion = input("Choose option for route planning (time/cost): ").strip().lower()
-    if criterion not in ["time", "cost"]:
-        logger.warning("Invalid option entered. Defaulting to 'time'.")
-        criterion = "time"
+    # Start at Tarjan's House
+    start_node = "Yeoui-daero"
 
-    best_route, transport_methods, durations = planner.find_best_route(
-        start_node="Relative_1", criterion=criterion
+    best_route, transport_methods, durations, costs = planner.find_best_route(
+        start_node=start_node
     )
-    planner.plot_graph() # criterion=criterion
-    formatted_route = planner.format_route(best_route, transport_methods, durations)
-    logger.info("Best route based on %s:\n%s", criterion, formatted_route)
+    planner.plot_graph()
+    formatted_route = planner.format_route(best_route, transport_methods, durations, costs)
+    logger.info("Best route based on travel time:\n%s", formatted_route)
 
     logger.info("Returning to Menu...")
     tm.sleep(1)
 
 
-# 4
+# 5
 def compare_transport_methods():
     """
     Compares different transport methods between two selected relatives based on both time and cost.
     """
-    logger.info("User selected Option 4: Compare Transport Methods")
-    planner = TarjanPlanner(RELATIVES_FILE, TRANSPORT_FILE)
+    logger.info("User selected Option 5: Compare Transport Methods")
+    planner = TarjanPlanner(RELATIVES_FILE, TRANSPORT_FILE, LINKS_FILE)
     planner.create_graph()
 
     # Prompt the user to enter two integers corresponding to the relatives
@@ -118,10 +126,12 @@ def compare_transport_methods():
         return
 
     relative1 = relatives[relative1_index - 1]["Relative"]
+    relative1_street = relatives[relative1_index - 1]["Street Name"]
     relative2 = relatives[relative2_index - 1]["Relative"]
+    relative2_street = relatives[relative2_index - 1]["Street Name"]
 
     # Calculate and display the comparison of different transport methods
-    print(f"Comparison of transport methods between {relative1} and {relative2}:")
+    print(f"Comparison of transport methods between {relative1} ({relative1_street}) and {relative2} ({relative2_street}):")
     for transport in planner.transport_manager.get_transport():
         distance = geodesic(
             (
@@ -145,25 +155,25 @@ def compare_transport_methods():
     tm.sleep(1)
 
 
-# 5
+# 6
 def clear_log():
     """
     Clears all data in the logger file.
     """
-    logger.info("User selected Option 5: Clear Log File")
+    logger.info("User selected Option 6: Clear Log File")
     clear_log_file()
     print("Log file cleared.")
     logger.info("Returning to Menu...")
     tm.sleep(1)
 
-# def option6():
 
-#     print("You selected Option 6.")
+# 7
+def make_map():
 
-
-# def option7():
-
-#     print("You selected Option 7.")
+    print("You selected Option 7: Make Map")
+    planner = TarjanPlanner(RELATIVES_FILE, TRANSPORT_FILE, LINKS_FILE)
+    planner.create_graph()
+    planner.plot_graph()
 
 
 # def option8():
@@ -178,11 +188,11 @@ def clear_log():
 options = {
     1: print_relatives,
     2: print_transport,
-    3: route_planner,
-    4: compare_transport_methods,
-    5: clear_log,
-    # 6: option6,
-    # 7: option7,
+    3: print_links,
+    4: route_planner,
+    5: compare_transport_methods,
+    6: clear_log,
+    7: make_map,
     # 8: option8,
     # 9: option9,
 }
