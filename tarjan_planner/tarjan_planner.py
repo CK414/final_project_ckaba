@@ -6,7 +6,7 @@ import networkx as nx
 import matplotlib.pyplot as plt
 import matplotlib.patches as mpatches
 from matplotlib.lines import Line2D
-from itertools import combinations
+from itertools import permutations
 from geopy.distance import geodesic
 from .relatives_manager import RelativesManager
 from .transport_manager import TransportLinkManager
@@ -84,59 +84,58 @@ class TarjanPlanner:
                         cost
                     )
                     # Debug: Print edge creation
-                    print(f"Edge created: {start} -> {end} by {transport_type}, time={travel_time}, cost={cost}")
+                    # print(f"Edge created: {start} -> {end} by {transport_type}, time={travel_time}, cost={cost}")
 
     @log_execution_time
     def find_best_route(self, start_node):
         """
-        Find the best route based on travel time.
+        Find the best route based on travel time using a naive tree search algorithm.
         """
         weight = "travel_time"
-        
-        # Create a complete graph from the existing graph
-        complete_graph = nx.complete_graph(self.route_map.nodes)
-        for node in self.route_map.nodes:
-            complete_graph.add_node(node, pos=self.route_map.nodes[node]['pos'])
-            
-        for u, v in combinations(self.route_map.nodes, 2):
-            if self.route_map.has_edge(u, v):
-                complete_graph[u][v].update(self.route_map[u][v])
-            else:
-                # Add a high cost to discourage using this edge
-                complete_graph.add_edge(u, v, travel_time=float('inf'), transport='None')
 
-        # Use NetworkX's traveling_salesman_problem to find the best route
-        # path = nx.approximation.traveling_salesman_problem(complete_graph, weight=weight, cycle=False)
-        path = nx.approximation.greedy_tsp(complete_graph, source=start_node, weight=weight)
-        
-        # Ensure the path starts at the specified start_node
-        if start_node in path:
-            start_index = path.index(start_node)
-            path = path[start_index:] + path[:start_index]
+        # Generate all possible routes starting from the specified node
+        nodes = list(self.route_map.nodes)
+        nodes.remove(start_node)
+        all_routes = permutations(nodes)
 
-        # Extract transport methods and durations for the path
-        transport_methods = []
-        durations = []
-        costs = []
-        valid_path = [path[0]]  # Initialize with the starting node
-        for i in range(len(path) - 1):
-            edge_data = self.route_map.get_edge_data(path[i], path[i + 1])
-            if edge_data is None:
-                print(f"Warning: No edge data found for edge {path[i]} -> {path[i + 1]}")
-                continue
-            transport_methods.append(edge_data["transport"])
-            durations.append(edge_data[weight])
-            costs.append(edge_data["cost"])
-            valid_path.append(path[i + 1])
-            
+        min_travel_time = float('inf')
+
+        for route in all_routes:
+            route = [start_node] + list(route)
+            route_data = []
+            total_travel_time = 0
+
+            valid_route = True
+            for i in range(len(route) - 1):
+                edge_data = self.route_map.get_edge_data(route[i], route[i + 1])
+                if edge_data is None:
+                    # Try the reverse direction
+                    edge_data = self.route_map.get_edge_data(route[i + 1], route[i])
+                    if edge_data is None:
+                        valid_route = False
+                        break
+                route_data.append({
+                    "start": route[i],
+                    "end": route[i + 1],
+                    "transport": edge_data["transport"],
+                    "duration": edge_data[weight],
+                    "cost": edge_data["cost"]
+                })
+                total_travel_time += edge_data[weight]
+
+            if valid_route and total_travel_time < min_travel_time:
+                min_travel_time = total_travel_time
+                best_route_data = route_data
+
         # Debug: Print lengths of lists
-        # print(f"Path length: {len(valid_path)}")
-        # print(f"Transport methods length: {len(transport_methods)}")
-        # print(f"Durations length: {len(durations)}")
+        # print(f"Path length: {len(best_route)}")
+        # print(f"Transport methods length: {len(best_transport_methods)}")
+        # print(f"Durations length: {len(best_durations)}")
+        # print(f"Costs length: {len(best_costs)}")
 
-        return valid_path, transport_methods, durations, costs
+        return best_route_data
 
-    def plot_graph(self,):
+    def plot_graph(self, best_route_data=None):
         """
         Plot the graph using matplotlib, coloring edges based on the mode of transport.
         """
@@ -168,6 +167,8 @@ class TarjanPlanner:
             pos,
             with_labels=True,
             nodelist=tarjan_nodes,
+            edge_color=edge_colors,
+            style='dashed',
             node_color='lightgreen',
             node_shape='s',
             node_size=500,
@@ -181,11 +182,12 @@ class TarjanPlanner:
             pos,
             with_labels=True,
             nodelist=other_nodes,
+            edge_color=edge_colors,
+            style='dashed',
             node_color='lightblue',
             node_shape='o',
             node_size=500,
             font_size=6,
-            edge_color=edge_colors,
             ax=ax
         )
 
@@ -215,6 +217,19 @@ class TarjanPlanner:
         ax.set_axis_on()
         ax.grid(True)
         
+        # Highlight the best route if provided
+        if best_route_data:
+            best_route_edges = [(segment['start'], segment['end']) for segment in best_route_data]
+            nx.draw_networkx_edges(
+                self.route_map,
+                pos,
+                edgelist=best_route_edges,
+                edge_color=edge_colors,
+                arrows=True,
+                arrowstyle="-|>",
+                width=2,
+            )
+        
         # Create edge labels
         edge_labels = {
             (u, v): f"{data['distance']:.2f}km"
@@ -234,20 +249,22 @@ class TarjanPlanner:
 
         plt.show(block=False)
         
-    def format_route(self, route, transport_methods, durations, costs):
+    def format_route(self, route_data):
         """
         Format the route for display.
         """
         formatted_route = []
-        for i in range(len(route) - 1):
+        total_duration = 0
+        total_cost = 0
+        
+        for i, segment in enumerate(route_data):
             formatted_route.append(
-                f"{i+1}: {route[i]} -> {route[i + 1]} by {transport_methods[i]} "
-                f"(time: {durations[i]*60:.2f} min) (cost: KRW {costs[i]:.2f})"
+                f"{i+1}: {segment['start']} -> {segment['end']} by {segment['transport']} "
+                f"(time: {segment['duration'] * 60:.2f} min) (cost: ₩{segment['cost']:.2f})"
             )
+            total_duration += segment['duration']
+            total_cost += segment['cost']
             
-        # Calculate total duration
-        total_duration = sum(durations)
-        total_cost = sum(costs)
         # Append total duration to the formatted route
         formatted_route.append(f"Total duration: {total_duration:.2f}h [{total_duration*60:.2f} min]")
         formatted_route.append(f"Total cost: KRW {total_cost:.2f}")

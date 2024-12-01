@@ -80,12 +80,13 @@ def route_planner():
 
     # Start at Tarjan's House
     start_node = "Yeoui-daero"
-
-    best_route, transport_methods, durations, costs = planner.find_best_route(
+    
+    best_route = []
+    best_route = planner.find_best_route(
         start_node=start_node
     )
-    planner.plot_graph()
-    formatted_route = planner.format_route(best_route, transport_methods, durations, costs)
+    planner.plot_graph(best_route)
+    formatted_route = planner.format_route(best_route)
     logger.info("Best route based on travel time:\n%s", formatted_route)
 
     logger.info("Returning to Menu...")
