@@ -27722,3 +27722,19 @@ Total cost: KRW 50.50
 2024-12-01 06:43:03,859 - tarjan_planner_logger - INFO - Returning to Menu...
 2024-12-01 06:43:16,619 - tarjan_planner_logger - DEBUG - Edge from Yeoui-daero to Hannam-daero by Bus: time=0.26, cost=14.11
 2024-12-01 06:43:16,619 - tarjan_planner_logger - DEBUG - Edge from Yeoui-daero to Bukhan-ro by Bus: time=0.29, cost=16.76
+2024-12-01 06:43:16,619 - tarjan_planner_logger - DEBUG - Edge from Hannam-daero to Bukhan-ro by Bus: time=0.22, cost=10.71
+2024-12-01 06:43:16,620 - tarjan_planner_logger - DEBUG - Edge from Bukhan-ro to Seongsu-daero by Bus: time=0.27, cost=14.88
+2024-12-01 06:43:16,620 - tarjan_planner_logger - DEBUG - Edge from Seongsu-daero to Jamsil-ro by Bus: time=0.22, cost=10.80
+2024-12-01 06:43:16,620 - tarjan_planner_logger - DEBUG - Edge from Sinsa-daero to Cheongdam-ro by Walking: time=0.19, cost=0.00
+2024-12-01 06:43:16,620 - tarjan_planner_logger - DEBUG - Edge from Hannam-daero to Sinsa-daero by Bicycle: time=0.21, cost=0.00
+2024-12-01 06:43:16,621 - tarjan_planner_logger - DEBUG - Edge from Hannam-daero to Apgujeong-ro by Bicycle: time=0.26, cost=0.00
+2024-12-01 06:43:16,621 - tarjan_planner_logger - DEBUG - Edge from Sinsa-daero to Gangnam-daero by Bicycle: time=0.16, cost=0.00
+2024-12-01 06:43:16,621 - tarjan_planner_logger - DEBUG - Edge from Sinsa-daero to Yangjae-daero by Bicycle: time=0.27, cost=0.00
+2024-12-01 06:43:16,621 - tarjan_planner_logger - DEBUG - Edge from Sinsa-daero to Apgujeong-ro by Bicycle: time=0.10, cost=0.00
+2024-12-01 06:43:16,622 - tarjan_planner_logger - DEBUG - Edge from Gangnam-daero to Yangjae-daero by Bicycle: time=0.13, cost=0.00
+2024-12-01 06:43:16,622 - tarjan_planner_logger - DEBUG - Edge from Cheongdam-ro to Samseong-ro by Bicycle: time=0.14, cost=0.00
+2024-12-01 06:43:16,622 - tarjan_planner_logger - DEBUG - Edge from Cheongdam-ro to Apgujeong-ro by Bicycle: time=0.05, cost=0.00
+2024-12-01 06:43:16,622 - tarjan_planner_logger - DEBUG - Edge from Cheongdam-ro to Seongsu-daero by Bicycle: time=0.24, cost=0.00
+2024-12-01 06:43:16,623 - tarjan_planner_logger - DEBUG - Edge from Apgujeong-ro to Seongsu-daero by Bicycle: time=0.20, cost=0.00
+2024-12-01 06:43:16,623 - tarjan_planner_logger - DEBUG - Edge from Apgujeong-ro to Samseong-ro by Bicycle: time=0.15, cost=0.00
+2024-12-01 06:43:16,623 - tarjan_planner_logger - DEBUG - Edge from Samseong-ro to Jamsil-ro by Bicycle: time=0.28, cost=0.00
