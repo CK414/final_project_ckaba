@@ -29,9 +29,9 @@ def display_menu():
     print("2. List Modes of Transport")
     print("3. List Transport Links")
     print("4. Execute Route Planner")  # Run route planner
-    print("5. Compare transport modes between two relatives")
-    print("6. Clear Log File")
-    print("7. Make Map")
+    # print("5. Compare transport modes between two relatives")
+    print("5. Clear Log File")
+    # print("7. Make Map")
     # print("8. Option 8")
     # print("9. Option 9")
     print("0. Quit")
@@ -191,9 +191,9 @@ options = {
     2: print_transport,
     3: print_links,
     4: route_planner,
-    5: compare_transport_methods,
-    6: clear_log,
-    7: make_map,
+    #5: compare_transport_methods,
+    5: clear_log,
+    #7: make_map,
     # 8: option8,
     # 9: option9,
 }

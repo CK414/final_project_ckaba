@@ -1,0 +1,12 @@
+{
+    "source_directory": "file_organizer/source_directory",
+    "destination_directory": "file_organizer/organized_files",
+    "log_file": "file_organizer/file_organizer.log",
+    "file_types": {
+        "images": "\\.(jpg|jpeg|png|gif)$",
+        "documents": "\\.(pdf|docx|txt)$",
+        "videos": "\\.(mp4|mkv|avi)$",
+        "music": "\\.(mp3|wav|flac)$",
+        "archives": "\\.(zip|tar|gz|rar)$"
+    }
+}

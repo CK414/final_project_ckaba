@@ -31,7 +31,7 @@ def main():
                 logger.info("User selected to quit the program.")
                 print("Exiting the program.")
                 menu_quit = True
-            elif 1 <= user_input <= 7:
+            elif 1 <= user_input <= 5:
                 # Call the function associated with the chosen number
                 interface.options[user_input]()
             else:

@@ -1,6 +1,9 @@
 # ACIT4420 Final Project - TarjanPlanner
  Final Project for ACIT 4420
 
+ Contains two parts, TarjanPlanner, & FileOrganizer
+
+## Part 1: TarjanPlanner
  Program must calculate the most efficient route through Seoul, S. Korea to reach the locations of Tarjan's 10 relatives.
 
  run from:

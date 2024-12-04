@@ -1,0 +1,24 @@
+2024-12-04 07:20:08,697 - INFO - Configuration loaded:
+2024-12-04 07:20:08,698 - INFO - {
+    "source_directory": "file_organizer/source_directory",
+    "destination_directory": "file_organizer/organized_files",
+    "log_file": "file_organizer/file_organizer.log",
+    "file_types": {
+        "images": "\\.(jpg|jpeg|png|gif)$",
+        "documents": "\\.(pdf|docx|txt)$",
+        "videos": "\\.(mp4|mkv|avi)$",
+        "music": "\\.(mp3|wav|flac)$",
+        "archives": "\\.(zip|tar|gz|rar)$"
+    }
+}
+2024-12-04 07:20:08,700 - INFO - Moved archive1.rar to file_organizer\organized_files\archives\archive1.rar
+2024-12-04 07:20:08,702 - INFO - Moved doc1.pdf to file_organizer\organized_files\documents\doc1.pdf
+2024-12-04 07:20:08,703 - INFO - Moved doc2.pdf to file_organizer\organized_files\documents\doc2.pdf
+2024-12-04 07:20:08,705 - INFO - Moved doc3.docx to file_organizer\organized_files\documents\doc3.docx
+2024-12-04 07:20:08,706 - INFO - Moved download1.zip to file_organizer\organized_files\archives\download1.zip
+2024-12-04 07:20:08,708 - INFO - Moved img1.jpg to file_organizer\organized_files\images\img1.jpg
+2024-12-04 07:20:08,709 - INFO - Moved img2.jpg to file_organizer\organized_files\images\img2.jpg
+2024-12-04 07:20:08,711 - INFO - Moved music1.mp3 to file_organizer\organized_files\music\music1.mp3
+2024-12-04 07:20:08,713 - INFO - Moved otherfile.xyz to file_organizer\organized_files\others\otherfile.xyz
+2024-12-04 07:20:08,714 - INFO - Moved vid1.mp4 to file_organizer\organized_files\videos\vid1.mp4
+2024-12-04 07:20:08,715 - INFO - Moved vid2.mp4 to file_organizer\organized_files\videos\vid2.mp4
