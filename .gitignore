@@ -1,2 +1,8 @@
 /tarjan_planner/__pycache__/
+/file_organizer/__pycache__/
+/dist/
+/build/
+/FinalProjectCkaba.egg-info
+/.pytest_cache
 *.pyc
+run_file_organizer.py
