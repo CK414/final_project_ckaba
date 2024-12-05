@@ -14,7 +14,6 @@ setup(
         "matplotlib", # For plotting graphs
         'pytest',  # For running tests
         'logging',  # For logging operations
-        'shutil',  # For file operations
         'os',  # For directory and file path operations
         'json',  # For handling JSON configuration files
         're',  # For regular expressions
