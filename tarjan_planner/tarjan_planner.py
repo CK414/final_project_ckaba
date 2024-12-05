@@ -260,7 +260,7 @@ class TarjanPlanner:
         for i, segment in enumerate(route_data):
             formatted_route.append(
                 f"{i+1}: {segment['start']} -> {segment['end']} by {segment['transport']} "
-                f"(time: {segment['duration'] * 60:.2f} min) (cost: ₩{segment['cost']:.2f})"
+                f"(time: {segment['duration'] * 60:.2f} min) (cost: KRW{segment['cost']:.2f})"
             )
             total_duration += segment['duration']
             total_cost += segment['cost']

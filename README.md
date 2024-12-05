@@ -14,14 +14,14 @@ This project contains two modules: Tarjan Planner and File Organizer.
 
     ```sh
     git clone https://github.com/CK414/final_project_ckaba.git
-    cd final_project_ckaba
+    
     ```
 
-2. **Build and install the package locally:**
+2. **Navigate to the directory and install the package using pip:**
 
     ```sh
-    python setup.py sdist bdist_wheel
-    pip install dist/final_project_ckaba-1.0.0-py3-none-any.whl
+    cd final_project_ckaba
+    pip install .
     ```
 
 ## Running the Modules
