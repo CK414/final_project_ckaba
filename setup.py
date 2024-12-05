@@ -14,8 +14,6 @@ setup(
         "matplotlib", # For plotting graphs
         'pytest',  # For running tests
         'logging',  # For logging operations
-        'json',  # For handling JSON configuration files
-        're',  # For regular expressions
     ],
     entry_points={
         "console_scripts": [
